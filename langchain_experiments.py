@@ -104,8 +104,8 @@ es_client = Elasticsearch(
 vectorstore = ElasticsearchStore(
     index_name="profile",
     es_connection=es_client,
-    es_user = ES_USER,
-    es_password = ES_PASS
+    es_user = st.secrets["ES_USER"],
+    es_password = st.secrets["ES_PASS"]
 )
 
 st.info(es_client.info())
