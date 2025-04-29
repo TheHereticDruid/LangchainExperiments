@@ -108,7 +108,7 @@ vectorstore = ElasticsearchStore(
     es_password = st.secrets["ES_PASS"]
 )
 
-st.info(es_client.info())
+st.info(vectorstore.search("*.*"))
 
 # print("STOP")
 
