@@ -102,7 +102,7 @@ es_client = Elasticsearch(
 )
 
 vectorstore = ElasticsearchStore(
-    index_name="profile",
+    index_name="property-application",
     es_connection=es_client,
     es_user = st.secrets["ES_USER"],
     es_password = st.secrets["ES_PASS"]
