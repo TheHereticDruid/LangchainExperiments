@@ -108,7 +108,7 @@ vectorstore = ElasticsearchStore(
     es_password = st.secrets["ES_PASS"]
 )
 
-st.info(vectorstore.search("*.*"))
+st.info(vectorstore.search("*.*", "similarity"))
 
 # print("STOP")
 
