@@ -8,6 +8,7 @@ from langchain.chains.query_constructor.schema import AttributeInfo
 # from langchain_core.documents import Document
 from elasticsearch import Elasticsearch
 from langchain_elasticsearch import ElasticsearchStore
+from langchain_huggingface import HuggingFaceEmbeddings
 
 st.title("🦜🔗 First Attempt")
 
@@ -97,15 +98,19 @@ st.title("🦜🔗 First Attempt")
 #     if submitted and huggingface_api_key.startswith("hf_"):
 es_client = Elasticsearch(
     "https://unified-dev-monitorai.digit.org/",
+    basic_auth=(st.secrets["ES_USER"], st.secrets["ES_PASS"]),
     verify_certs=False,
     ssl_show_warn=False
 )
 
+hf_embeddings = HuggingFaceEmbeddings(
+    model_name="HuggingFaceH4/zephyr-7b-beta"
+)
+
 vectorstore = ElasticsearchStore(
     index_name="property-application",
+    embeddings=hf_embeddings,
     es_connection=es_client,
-    es_user = st.secrets["ES_USER"],
-    es_password = st.secrets["ES_PASS"]
 )
 
 st.info(vectorstore.search("*.*", "similarity"))
